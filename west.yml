@@ -1,0 +1,29 @@
+# Copyright (c) 2025 Navimatix GmbH
+# SPDX-License-Identifier: Apache-2.0
+
+manifest:
+  remotes:
+    # Url for the Github organization where the Zephyr repository (or in this case a fork)
+    # is hosted. This can also be used to include other dependencies.
+    - name: tiacsys
+      url-base: https://github.com/tiacsys
+
+  projects:
+    # Definition of the Zephyr project to use
+    - name: zephyr
+      # We are using a fork of zephyr of the tiacsys organization
+      remote: tiacsys
+      # Zephyr branch used for this demo
+      revision: main
+      # Allows for calling o west commands without giving script source paths every time
+      west-commands: scripts/west-commands.yml
+      # Import the external modules required for this project using a whitelist. During
+      # early development it is often easier to just import all modules with import: true
+      # but this requires additional disk space and might slow down the build process.
+      import:
+        name-allowlist:
+          - hal_nxp
+          - hal_stm32
+          - hal_rpi_pico
+          - cmsis
+          - cmsis_6
