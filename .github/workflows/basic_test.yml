@@ -23,11 +23,17 @@ jobs:
         with:
           app-path: workflow_test
           toolchains: x86_64-zephyr-elf
+      - name: Debug Output
+        run: |
+          ls
+          cd workflow_test
+          ls
+          cd ..
       - name: Run Test
         run: |
           west twister \
             -p native_sim \
-            -T workflow-test/tests/drv8424 \
+            -T workflow_test/tests/drv8424 \
             --simulation native \
             -v \
             -x=CONFIG_ZTEST_SHUFFLE=y 
